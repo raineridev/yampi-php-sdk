@@ -13,15 +13,20 @@
   processIsolation="false"
   stopOnFailure="false"
 >
-  <coverage>
-    <include>
-      <directory suffix=".php">src/</directory>
-    </include>
-  </coverage>
-
   <testsuites>
     <testsuite name="yampi-php-sdk Test Suite">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./src</directory>
+    </whitelist>
+  </filter>
+
+  <logging>
+    <log type="coverage-text" target="php://stdout"/>
+    <log type="coverage-clover" target="cov.xml"/>
+  </logging>
 </phpunit>
