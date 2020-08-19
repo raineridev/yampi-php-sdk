@@ -405,12 +405,12 @@ class RequestTest extends TestCase
 
         $this->assertArrayNotHasKey($key, $api->getQuery());
 
-        $api->{$key}(['name' => 'Lucas Collete']);
+        $api->{$key}(['name' => 'Lucas Colette']);
         $this->assertArrayHasKey($key, $api->getQuery());
-        $this->assertEquals('name:Lucas Collete', $api->getQuery()[$key]);
+        $this->assertEquals('name:Lucas Colette', $api->getQuery()[$key]);
 
         $api->{$key}(['some' => 'thing']);
-        $this->assertEquals('name:Lucas Collete;some:thing', $api->getQuery()[$key]);
+        $this->assertEquals('name:Lucas Colette;some:thing', $api->getQuery()[$key]);
 
         $api->{$key}(['new' => 'search'], false);
         $this->assertEquals('new:search', $api->getQuery()[$key]);
