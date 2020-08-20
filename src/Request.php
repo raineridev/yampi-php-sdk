@@ -664,7 +664,7 @@ class Request
                     $Response,
                     $response['errors'],
                     $e->getCode(),
-                    $e,
+                    $e
                 );
             }
 
@@ -674,7 +674,7 @@ class Request
                 $this,
                 $Response,
                 $e->getCode(),
-                $e,
+                $e
             );
         } finally {
             $this->resetRoute();
