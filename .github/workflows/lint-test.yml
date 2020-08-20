@@ -23,7 +23,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           extensions: mbstring
-          coverage: pcov
+          coverage: pcov, xdebug
           tools: prestissimo, php-cs-fixer, phpunit
 
       - name: Get composer cache directory
