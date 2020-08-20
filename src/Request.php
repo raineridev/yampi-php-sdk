@@ -423,11 +423,11 @@ class Request
     }
 
     /**
-      * Adds an orderBy query param
-      *
-      * @param string $orderBy The orderBy attribute
-      * @return self
-      */
+     * Adds an orderBy query param
+     *
+     * @param string $orderBy The orderBy attribute
+     * @return self
+     */
     public function orderBy($orderBy) : self
     {
         $this->setQuery('orderBy', $orderBy);
@@ -436,10 +436,10 @@ class Request
     }
 
     /**
-      * Removes orderBy query param
-      *
-      * @return self
-      */
+     * Removes orderBy query param
+     *
+     * @return self
+     */
     public function noOrderBy() : self
     {
         unset($this->query['orderBy']);
