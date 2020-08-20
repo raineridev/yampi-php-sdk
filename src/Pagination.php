@@ -1,10 +1,9 @@
 <?php
 
-namespace Dooki;
+namespace Yampi\Api;
 
-class DookiPagination
+class Pagination
 {
-    
     /**
      * @var int
      */
