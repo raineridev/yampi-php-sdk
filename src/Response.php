@@ -74,7 +74,7 @@ class Response
     }
 
     /**
-     * Gets Yampi data key's data.
+     * Gets Yampi data key.
      *
      * @return array
      */
@@ -94,7 +94,7 @@ class Response
     }
 
     /**
-     * Sets Yampi data key's data.
+     * Sets Yampi data key.
      *
      * @param array $data
      */
@@ -104,9 +104,9 @@ class Response
     }
 
     /**
-     * setMeta
+     * Sets Yampi meta data key
      *
-     * @param array $data
+     * @param array $value
      */
     protected function setMeta($value)
     {

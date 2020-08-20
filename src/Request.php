@@ -423,9 +423,11 @@ class Request
     }
 
     /**
-     * {@link ->orderBy('name')}
-     * @return self
-     */
+      * Adds an orderBy query param
+      *
+      * @param string $orderBy The orderBy attribute
+      * @return self
+      */
     public function orderBy($orderBy) : self
     {
         $this->setQuery('orderBy', $orderBy);
@@ -434,9 +436,10 @@ class Request
     }
 
     /**
-     * {@link ->orderBy('name')}
-     * @return self
-     */
+      * Removes orderBy query param
+      *
+      * @return self
+      */
     public function noOrderBy() : self
     {
         unset($this->query['orderBy']);
@@ -469,7 +472,7 @@ class Request
     }
 
     /**
-     * Renoves sortBy query param
+     * Removes sortBy query param
      *
      * @return self
      */
@@ -563,7 +566,7 @@ class Request
     }
 
     /**
-     * Gets the request's full route.
+     * Gets the request full route.
      *
      * @return string
      */
