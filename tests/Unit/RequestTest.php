@@ -407,6 +407,8 @@ class RequestTest extends TestCase
 
         $this->assertArrayHasKey('page', $query);
         $this->assertArrayHasKey('foo', $query);
+        $this->assertEquals('1', $query['page']);
+        $this->assertEquals('bar', $query['foo']);
     }
 
     public function test_set_route_without_query_string()
