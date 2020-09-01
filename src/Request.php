@@ -184,6 +184,14 @@ class Request
      */
     public function setRoute($route) : self
     {
+        $query = parse_url($route, PHP_URL_QUERY);
+
+        if ($query) {
+            parse_str($query, $queries);
+
+            $this->addQueries($queries);
+        }
+
         $this->route = ltrim($route, '/');
 
         return $this;
