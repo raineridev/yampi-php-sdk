@@ -399,6 +399,23 @@ class RequestTest extends TestCase
         $this->assertEquals('true', $api->getQuery()['skipCache']);
     }
 
+    public function test_set_route_with_query_string()
+    {
+        $api = Request::local()->setRoute('http://local.test/?page=1&foo=bar');
+
+        $query = $api->getQuery();
+
+        $this->assertArrayHasKey('page', $query);
+        $this->assertArrayHasKey('foo', $query);
+    }
+
+    public function test_set_route_without_query_string()
+    {
+        $api = Request::local()->setRoute('http://local.test/');
+
+        $this->assertEquals($api->getRoute(), 'http://local.test/');
+    }
+
     protected function genericTestSearch($key)
     {
         $api = Request::url('http://local.test');
@@ -418,22 +435,5 @@ class RequestTest extends TestCase
         $this->expectException(InvalidSearchValueException::class);
         $api->{$key}(['invalid' => '']);
         $api->{$key}(['invalid' => []]);
-    }
-
-    function test_set_route_with_query_string()
-    {
-        $api = Request::local()->setRoute('http://local.test/?page=1&foo=bar');
-
-        $query = $api->getQuery();
-
-        $this->assertArrayHasKey('page', $query);
-        $this->assertArrayHasKey('foo', $query);
-    }
-
-    function test_set_route_without_query_string()
-    {
-        $api = Request::local()->setRoute('http://local.test/');
-
-        $this->assertEquals($api->getRoute(), 'http://local.test/');
     }
 }
