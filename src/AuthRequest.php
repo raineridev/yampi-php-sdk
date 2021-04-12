@@ -113,7 +113,7 @@ class AuthRequest extends Request
 
         $this->addHeader(
             $type === 'bearer' ? 'Authorization' : 'User-Token',
-            $type === 'bearer' ? "Bearer $token" : $token
+            $type === 'bearer' ? "Bearer {$token}" : $token
         );
 
         return $this;
