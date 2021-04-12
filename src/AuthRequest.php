@@ -102,12 +102,7 @@ class AuthRequest extends Request
      */
     protected function configureAuthToken(string $type, string $token)
     {
-        $types = [
-            'bearer' => 'Authorization',
-            'user-token' => 'User-Token',
-        ];
-
-        $availableTypes = array_keys($types);
+        $availableTypes = ['bearer', 'user-token'];
 
         if (!in_array($type, $availableTypes)) {
             throw new InvalidTokenTypeException('Invalid Token type. Available: ' . implode(', ', $availableTypes));
@@ -117,8 +112,8 @@ class AuthRequest extends Request
         $this->setAuthTokenType($type);
 
         $this->addHeader(
-            $types[$type],
-            $token
+            $type === 'bearer' ? 'Authorization' : 'User-Token',
+            $type === 'bearer' ? "Bearer {$token}" : $token
         );
 
         return $this;
