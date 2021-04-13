@@ -160,6 +160,19 @@ class Request
     }
 
     /**
+     * Set User-Agent being used for all requests
+     *
+     * @param string $userAgent
+     * @return self
+     */
+    public function setUserAgent(string $userAgent) : self
+    {
+        $this->userAgent = $userAgent;
+
+        return $this;
+    }
+
+    /**
      * Sets the request's HTTP method.
      *
      * @param string $method
