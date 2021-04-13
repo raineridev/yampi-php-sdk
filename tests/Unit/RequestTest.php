@@ -8,7 +8,6 @@ use Throwable;
 use Yampi\Api\Exceptions\InvalidIncludeException;
 use Yampi\Api\Exceptions\InvalidMethodException;
 use Yampi\Api\Exceptions\InvalidParamException;
-use Yampi\Api\Exceptions\InvalidSearchValueException;
 
 class RequestTest extends TestCase
 {
@@ -434,8 +433,10 @@ class RequestTest extends TestCase
         $api->{$key}(['new' => 'search'], false);
         $this->assertEquals('new:search', $api->getQuery()[$key]);
 
-        $this->expectException(InvalidSearchValueException::class);
-        $api->{$key}(['invalid' => '']);
-        $api->{$key}(['invalid' => []]);
+        $api->{$key}(['arr' => ['some' => 'thing']], false);
+        $this->assertEquals('', $api->getQuery()[$key]);
+
+        $api->{$key}(['invalid' => ''], false);
+        $this->assertEquals('', $api->getQuery()[$key]);
     }
 }

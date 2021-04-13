@@ -10,7 +10,6 @@ use Yampi\Api\Exceptions\RequestException;
 use Yampi\Api\Exceptions\ValidationException;
 use Yampi\Api\Exceptions\InvalidMethodException;
 use Yampi\Api\Exceptions\InvalidParamException;
-use Yampi\Api\Exceptions\InvalidSearchValueException;
 
 class Request
 {
@@ -786,7 +785,7 @@ class Request
 
         foreach ($parameter as $field => $value) {
             if (!is_string($value) || empty($value)) {
-                throw new InvalidSearchValueException('Search value must be a not empty string', $this);
+                continue;
             }
 
             $values[] = $field . ':' . $value;
