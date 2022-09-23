@@ -92,7 +92,7 @@ class AuthRequest extends Request
      */
     protected function setJwtExpiresIn($value)
     {
-        $this->jwtExpiresIn($value);
+        $this->jwtExpiresIn = $value;
 
         return $this;
     }
