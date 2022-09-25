@@ -13,6 +13,8 @@ class AuthRequest extends Request
 
     protected $user;
 
+    protected $jwtExpiresIn;
+
     /**
      * Gets the User logged in
      *
@@ -77,8 +79,32 @@ class AuthRequest extends Request
 
         $this->configureAuthToken($response['token_type'], $response['access_token']);
         $this->setUser($response['user']);
+        $this->setJwtExpiresIn($response['expires_in']);
 
         return $this;
+    }
+
+    /**
+     * Set JWT expires value
+     *
+     * @param int $value | seconds
+     * @return void
+     */
+    protected function setJwtExpiresIn($value)
+    {
+        $this->jwtExpiresIn = $value;
+
+        return $this;
+    }
+
+    /**
+     * getJwtExpiresIn
+     *
+     * @return int | seconds
+     */
+    public function getJwtExpiresIn()
+    {
+        return $this->jwtExpiresIn;
     }
 
     /**
