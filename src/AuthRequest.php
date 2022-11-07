@@ -63,17 +63,20 @@ class AuthRequest extends Request
     }
 
     /**
-     * @param array $params
+     * @param string $username
+     * @param string $password
+     * @param string $mfaCode = ''
      *
      * @throws RequestException if anything gets wrong.
      */
-    public function login(string $username, string $password)
+    public function login(string $username, string $password, string $mfaCode = '')
     {
         $response = $this
             ->setRoute('auth/login')
             ->post([
                 'email' => $username,
                 'password' => $password,
+                'mfa_code' => $mfaCode,
             ])
             ->getResponse();
 
