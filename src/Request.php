@@ -4,6 +4,7 @@ namespace Yampi\Api;
 
 use GuzzleHttp\Client as Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Teapot\StatusCode;
 use Yampi\Api\Exceptions\InvalidIncludeException;
 use Yampi\Api\Exceptions\RequestException;
@@ -47,6 +48,11 @@ class Request
      * @var array
      */
     protected $body = [];
+
+    /**
+     * @var int
+     */
+    protected $timeout = 15;
 
     /**
      * @var string
@@ -169,6 +175,29 @@ class Request
         $this->userAgent = $userAgent;
 
         return $this;
+    }
+
+    /**
+     * Set timeout being used for all requests
+     *
+     * @param int $timeout
+     * @return self
+     */
+    public function setTimeout(int $timeout) : self
+    {
+        $this->timeout = $timeout;
+
+        return $this;
+    }
+
+    /**
+     * Get timeout being used for all requests
+     *
+     * @return int
+     */
+    public function getTimeout() : int
+    {
+        return $this->timeout;
     }
 
     /**
@@ -620,6 +649,7 @@ class Request
                 'User-Agent' => $this->getUserAgent(),
             ]),
             'query' => $this->query,
+            'timeout' => $this->getTimeout(),
         ];
 
         if ($this->getMethod() === 'GET') {
@@ -699,6 +729,21 @@ class Request
                 $e->getCode(),
                 $e
             );
+
+        } catch (GuzzleException $e) {
+            $message = $e->getMessage();
+
+            if (str_contains($message, 'Operation timed out')) {
+                // Generic exception
+                throw new RequestException(
+                    $message,
+                    $this,
+                    null,
+                    StatusCode::GATEWAY_TIMEOUT // 504
+                );
+            }
+
+            throw $e;
         } finally {
             $this->resetRoute();
         }
